@@ -1,0 +1,21 @@
+# SportVenue — .gitignore
+
+# Environment
+.env
+
+# SQLite database
+database/data.db
+database/data.db-journal
+
+# Uploads
+public/assets/uploads/payments/*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

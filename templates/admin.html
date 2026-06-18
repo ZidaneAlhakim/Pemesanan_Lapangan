@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - SportVenue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { primary: '#3b82f6', darkBg: '#0f172a', darkCard: '#1e293b' } } }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 dark:bg-darkBg text-gray-800 dark:text-gray-200 h-screen flex overflow-hidden font-sans transition-colors duration-300">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white dark:bg-darkCard shadow-lg flex flex-col hidden md:flex">
+        <div class="h-16 flex items-center justify-center border-b dark:border-gray-700">
+            <span class="font-bold text-xl text-primary"><i class="fa-solid fa-shield-halved mr-2"></i>Admin Panel</span>
+        </div>
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-lg font-semibold">
+                <i class="fa-solid fa-chart-pie"></i> Dashboard
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition">
+                <i class="fa-solid fa-list-check"></i> Kelola Lapangan
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition">
+                <i class="fa-solid fa-calendar-check"></i> Reservasi Aktif
+                <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">5</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition">
+                <i class="fa-solid fa-file-invoice-dollar"></i> Laporan Keuangan
+            </a>
+            <button onclick="openScanModal()" class="w-full mt-4 flex justify-center items-center gap-2 px-4 py-3 bg-gray-900 dark:bg-gray-700 text-white rounded-lg shadow hover:bg-gray-800 transition">
+                <i class="fa-solid fa-qrcode"></i> Scan QR Check-in
+            </button>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-full">
+        
+        <!-- Top Header -->
+        <header class="h-16 bg-white dark:bg-darkCard shadow-sm flex items-center justify-between px-6 z-10">
+            <button class="md:hidden text-gray-500"><i class="fa-solid fa-bars text-xl"></i></button>
+            <div class="flex items-center bg-gray-100 dark:bg-gray-800 px-3 py-1.5 rounded-lg w-64">
+                <i class="fa-solid fa-search text-gray-400 mr-2"></i>
+                <input type="text" placeholder="Cari ID Booking..." class="bg-transparent border-none focus:outline-none text-sm w-full">
+            </div>
+            <div class="flex items-center gap-4">
+                <select class="text-sm bg-gray-100 dark:bg-gray-800 rounded-lg px-2 py-1 border-none outline-none">
+                    <option>Harian</option>
+                    <option selected>Mingguan</option>
+                    <option>Bulanan</option>
+                    <option>Tahunan</option>
+                </select>
+                <button onclick="document.documentElement.classList.toggle('dark')" class="text-gray-500 hover:text-primary"><i class="fa-solid fa-moon"></i></button>
+                <img src="https://ui-avatars.com/api/?name=Admin&background=3b82f6&color=fff" class="w-8 h-8 rounded-full">
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <main class="flex-1 p-6 overflow-y-auto">
+            
+            <h2 class="text-2xl font-bold mb-6">Ringkasan Laporan Pendapatan</h2>
+            
+            <!-- Widget Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white dark:bg-darkCard p-6 rounded-xl shadow-sm border dark:border-gray-800 flex items-center justify-between border-l-4 border-blue-500">
+                    <div>
+                        <p class="text-gray-500 text-sm font-semibold mb-1">Total Transaksi (Minggu Ini)</p>
+                        <h3 class="text-3xl font-bold">142</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-darkCard p-6 rounded-xl shadow-sm border dark:border-gray-800 flex items-center justify-between border-l-4 border-green-500">
+                    <div>
+                        <p class="text-gray-500 text-sm font-semibold mb-1">Total Pendapatan</p>
+                        <h3 class="text-2xl font-bold">Rp 18.500.000</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-darkCard p-6 rounded-xl shadow-sm border dark:border-gray-800 flex items-center justify-between border-l-4 border-purple-500">
+                    <div>
+                        <p class="text-gray-500 text-sm font-semibold mb-1">Lapangan Terlaris</p>
+                        <h3 class="text-xl font-bold">Futsal A</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white dark:bg-darkCard p-6 rounded-xl shadow-sm border dark:border-gray-800">
+                    <h3 class="font-bold mb-4">Grafik Lapangan Terbanyak Disewa</h3>
+                    <canvas id="barChart" height="100"></canvas>
+                </div>
+                <div class="bg-white dark:bg-darkCard p-6 rounded-xl shadow-sm border dark:border-gray-800">
+                    <h3 class="font-bold mb-4">Grafik Waktu Intensitas Tertinggi</h3>
+                    <canvas id="lineChart" height="100"></canvas>
+                </div>
+            </div>
+
+            <!-- Table Panel: Validasi Pembayaran -->
+            <div class="bg-white dark:bg-darkCard rounded-xl shadow-sm border dark:border-gray-800 overflow-hidden">
+                <div class="p-6 border-b dark:border-gray-700 flex justify-between items-center">
+                    <h3 class="font-bold text-lg">Validasi Bukti Pembayaran (Menunggu)</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                            <tr>
+                                <th class="px-6 py-3 font-semibold">ID Booking</th>
+                                <th class="px-6 py-3 font-semibold">Pelanggan</th>
+                                <th class="px-6 py-3 font-semibold">Lapangan</th>
+                                <th class="px-6 py-3 font-semibold">Waktu Sewa</th>
+                                <th class="px-6 py-3 font-semibold">Total Harga</th>
+                                <th class="px-6 py-3 font-semibold">Bukti TF</th>
+                                <th class="px-6 py-3 font-semibold text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                <td class="px-6 py-4 font-medium text-primary">#BKG-12345</td>
+                                <td class="px-6 py-4">Budi Santoso</td>
+                                <td class="px-6 py-4">Futsal A</td>
+                                <td class="px-6 py-4">Hari ini, 18:00 - 20:00</td>
+                                <td class="px-6 py-4 font-bold">Rp 240.000</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-blue-500 underline text-xs"><i class="fa-solid fa-image"></i> Lihat Bukti</button>
+                                </td>
+                                <td class="px-6 py-4 text-center space-x-2">
+                                    <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded shadow text-xs font-bold transition">Validasi</button>
+                                    <button class="bg-red-100 text-red-600 hover:bg-red-200 px-3 py-1.5 rounded shadow text-xs font-bold transition">Tolak</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                <td class="px-6 py-4 font-medium text-primary">#BKG-12346</td>
+                                <td class="px-6 py-4">Andi Wijaya</td>
+                                <td class="px-6 py-4">Basket Gor</td>
+                                <td class="px-6 py-4">Besok, 15:00 - 16:00</td>
+                                <td class="px-6 py-4 font-bold">Rp 150.000</td>
+                                <td class="px-6 py-4">
+                                    <button class="text-blue-500 underline text-xs"><i class="fa-solid fa-image"></i> Lihat Bukti</button>
+                                </td>
+                                <td class="px-6 py-4 text-center space-x-2">
+                                    <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded shadow text-xs font-bold transition">Validasi</button>
+                                    <button class="bg-red-100 text-red-600 hover:bg-red-200 px-3 py-1.5 rounded shadow text-xs font-bold transition">Tolak</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- QR Scan Modal (Mockup) -->
+    <div id="scanModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-darkCard w-full max-w-md rounded-xl overflow-hidden shadow-2xl relative">
+            <button onclick="closeScanModal()" class="absolute top-4 right-4 text-white hover:text-red-500 text-2xl z-10 drop-shadow-md"><i class="fa-solid fa-xmark"></i></button>
+            <div class="h-64 bg-gray-900 relative flex items-center justify-center">
+                <!-- Mockup camera frame -->
+                <div class="w-48 h-48 border-2 border-green-500 rounded relative">
+                    <div class="absolute w-full h-1 bg-green-500 animate-bounce shadow-[0_0_8px_#22c55e]"></div>
+                </div>
+                <p class="absolute bottom-4 text-white text-sm font-semibold opacity-80">Arahkan kamera ke QR Code pelanggan</p>
+            </div>
+            <div class="p-6 text-center">
+                <h3 class="font-bold text-lg mb-2">Scan QR Booking</h3>
+                <p class="text-sm text-gray-500">Sistem akan memverifikasi reservasi secara otomatis (Check-in lebih cepat).</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Init Charts
+        const isDark = document.documentElement.classList.contains('dark');
+        const textColor = isDark ? '#94a3b8' : '#475569';
+        
+        const ctxBar = document.getElementById('barChart').getContext('2d');
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Futsal A', 'Mini Soccer', 'Gor Basket', 'Badminton 1', 'Futsal B'],
+                datasets: [{
+                    label: 'Jumlah Reservasi',
+                    data: [85, 60, 45, 30, 25],
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 4
+                }]
+            },
+            options: { plugins: { legend: { display: false } }, scales: { y: { ticks: { color: textColor } }, x: { ticks: { color: textColor } } } }
+        });
+
+        const ctxLine = document.getElementById('lineChart').getContext('2d');
+        new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: ['14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'],
+                datasets: [{
+                    label: 'Intensitas (Jam)',
+                    data: [10, 15, 35, 60, 85, 95, 90, 50],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2
+                }]
+            },
+            options: { plugins: { legend: { display: false } }, scales: { y: { ticks: { color: textColor } }, x: { ticks: { color: textColor } } } }
+        });
+
+        function openScanModal() { document.getElementById('scanModal').classList.remove('hidden'); }
+        function closeScanModal() { document.getElementById('scanModal').classList.add('hidden'); }
+    </script>
+</body>
+</html>
