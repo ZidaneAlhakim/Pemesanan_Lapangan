@@ -85,6 +85,36 @@ class Database
 
     private static function ensureMysqlSchema($pdo)
     {
+        $pdo->exec("CREATE TABLE IF NOT EXISTS fields (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            sport VARCHAR(50) NOT NULL,
+            capacity VARCHAR(50) NOT NULL,
+            price_per_hour DECIMAL(10,2) NOT NULL,
+            description TEXT,
+            image VARCHAR(255) DEFAULT NULL,
+            is_active TINYINT(1) NOT NULL DEFAULT 1,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+        $pdo->exec("CREATE TABLE IF NOT EXISTS bookings (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            field_id INT NOT NULL,
+            customer_name VARCHAR(120) NOT NULL,
+            customer_email VARCHAR(150) NOT NULL,
+            customer_phone VARCHAR(30) NOT NULL,
+            booking_date DATE NOT NULL,
+            start_time TIME NOT NULL,
+            duration_hours INT NOT NULL,
+            total_price DECIMAL(10,2) NOT NULL,
+            status VARCHAR(30) NOT NULL DEFAULT 'pending',
+            payment_status VARCHAR(30) NOT NULL DEFAULT 'waiting',
+            payment_proof VARCHAR(255) DEFAULT NULL,
+            notes TEXT DEFAULT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (field_id) REFERENCES fields(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
         $pdo->exec("CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(50) NOT NULL UNIQUE,
@@ -134,17 +164,6 @@ class Database
                 notes TEXT DEFAULT NULL,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (field_id) REFERENCES fields(id) ON DELETE CASCADE
-            )
-        ");
-
-        $pdo->exec("
-            CREATE TABLE IF NOT EXISTS ratings (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                booking_id INTEGER NOT NULL,
-                rating INTEGER NOT NULL CHECK(rating >= 1 AND rating <= 5),
-                review TEXT,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
             )
         ");
 

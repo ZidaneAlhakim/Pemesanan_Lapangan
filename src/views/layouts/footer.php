@@ -14,13 +14,13 @@
                     </p>
                 </div>
                 <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-sport-500 hover:bg-sport-50 dark:hover:bg-sport-900/20 transition-all">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-none bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-sport-500 hover:bg-sport-50 dark:hover:bg-sport-900/20 transition-all">
                         <i data-lucide="instagram" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-sport-500 hover:bg-sport-50 dark:hover:bg-sport-900/20 transition-all">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-none bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-sport-500 hover:bg-sport-50 dark:hover:bg-sport-900/20 transition-all">
                         <i data-lucide="facebook" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-sport-500 hover:bg-sport-50 dark:hover:bg-sport-900/20 transition-all">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-none bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-sport-500 hover:bg-sport-50 dark:hover:bg-sport-900/20 transition-all">
                         <i data-lucide="twitter" class="w-5 h-5"></i>
                     </a>
                 </div>

@@ -5,15 +5,15 @@
     </div>
 
     <!-- Search Form -->
-    <div class="bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-zp mb-10">
+    <div class="bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl p-6 md:p-8 rounded-none border border-gray-100 dark:border-gray-800 shadow-zp mb-10">
         <form method="GET" action="<?= base_url('history') ?>" class="flex flex-col sm:flex-row gap-4">
             <div class="relative flex-1">
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <i data-lucide="mail" class="w-5 h-5 text-gray-400"></i>
                 </div>
-                <input type="email" name="email" value="<?= e($email) ?>" placeholder="Masukkan email Anda" required class="w-full pl-11 pr-4 py-4 text-sm md:text-base font-medium border-2 border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-800 focus:ring-0 focus:border-sport-500 outline-none transition-colors text-gray-900 dark:text-white">
+                <input type="email" name="email" value="<?= e($email) ?>" placeholder="Masukkan email Anda" required class="w-full pl-11 pr-4 py-4 text-sm md:text-base font-medium border-2 border-gray-200 dark:border-gray-700 rounded-none bg-white dark:bg-gray-800 focus:ring-0 focus:border-sport-500 outline-none transition-colors text-gray-900 dark:text-white">
             </div>
-            <button type="submit" class="px-8 py-4 bg-gradient-to-r from-sport-500 to-sport-600 text-white font-bold rounded-2xl hover:shadow-sport-500/30 transition-all shadow-lg flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+            <button type="submit" class="px-8 py-4 bg-gradient-to-r from-sport-500 to-sport-600 text-white font-bold rounded-none hover:shadow-sport-500/30 transition-all shadow-lg flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
                 <i data-lucide="search" class="w-5 h-5"></i>
                 Cari Riwayat
             </button>
@@ -22,8 +22,8 @@
 
     <?php if ($email && empty($bookings)): ?>
     <!-- Empty State -->
-    <div class="text-center py-16 bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-zp-sm">
-        <div class="w-24 h-24 bg-gray-50 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
+    <div class="text-center py-16 bg-white dark:bg-gray-900 rounded-none border border-gray-100 dark:border-gray-800 shadow-zp-sm">
+        <div class="w-24 h-24 bg-gray-50 dark:bg-gray-800 rounded-none flex items-center justify-center mx-auto mb-6">
             <i data-lucide="inbox" class="w-12 h-12 text-gray-300 dark:text-gray-600"></i>
         </div>
         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Riwayat Kosong</h3>
@@ -33,14 +33,14 @@
     <!-- Booking List -->
     <div class="space-y-6">
         <?php foreach ($bookings as $b): ?>
-        <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-zp-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
+        <div class="bg-white dark:bg-gray-900 rounded-none border border-gray-100 dark:border-gray-800 shadow-zp-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
             <div class="p-6 md:p-8">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     
                     <!-- Left info -->
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-3">
-                            <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold bg-sport-50 dark:bg-sport-900/20 text-sport-600 dark:text-sport-400">
+                            <span class="inline-flex items-center justify-center px-3 py-1 rounded-none text-xs font-bold bg-sport-50 dark:bg-sport-900/20 text-sport-600 dark:text-sport-400">
                                 #<?= e($b['id']) ?>
                             </span>
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white"><?= e($b['field_name']) ?></h3>
@@ -80,23 +80,18 @@
                             $sl = $statusLabels[$b['status']] ?? ['', ''];
                             $pl = $paymentLabels[$b['payment_status']] ?? ['', ''];
                             ?>
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border <?= $sl[1] ?>">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-xs font-bold border <?= $sl[1] ?>">
                                 <?= $sl[0] ?>
                             </span>
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border <?= $pl[1] ?>">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-xs font-bold border <?= $pl[1] ?>">
                                 <?= $pl[0] ?>
                             </span>
                         </div>
 
                         <div class="flex gap-2 w-full md:w-auto">
                             <?php if ($b['payment_status'] === 'waiting'): ?>
-                            <a href="<?= base_url('payment?id=' . $b['id']) ?>" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold bg-sport-500 text-white rounded-xl hover:bg-sport-600 hover:shadow-lg transition-all">
+                            <a href="<?= base_url('payment?id=' . $b['id']) ?>" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold bg-sport-500 text-white rounded-none hover:bg-sport-600 hover:shadow-lg transition-all">
                                 <i data-lucide="upload" class="w-4 h-4"></i> Upload Bukti
-                            </a>
-                            <?php endif; ?>
-                            <?php if ($b['status'] === 'confirmed'): ?>
-                            <a href="<?= base_url('rating?booking_id=' . $b['id']) ?>" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold bg-yellow-400 text-yellow-900 rounded-xl hover:bg-yellow-500 hover:shadow-lg transition-all">
-                                <i data-lucide="star" class="w-4 h-4"></i> Beri Rating
                             </a>
                             <?php endif; ?>
                         </div>
@@ -111,7 +106,7 @@
     <?php if ($totalPages > 1): ?>
     <div class="flex items-center justify-center gap-2 mt-10">
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="<?= base_url('history?email=' . urlencode($email) . '&page=' . $i) ?>" class="w-10 h-10 flex items-center justify-center text-sm font-bold rounded-xl transition-all <?= $i === $currentPage ? 'bg-sport-500 text-white shadow-md' : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700' ?>">
+        <a href="<?= base_url('history?email=' . urlencode($email) . '&page=' . $i) ?>" class="w-10 h-10 flex items-center justify-center text-sm font-bold rounded-none transition-all <?= $i === $currentPage ? 'bg-sport-500 text-white shadow-md' : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700' ?>">
             <?= $i ?>
         </a>
         <?php endfor; ?>

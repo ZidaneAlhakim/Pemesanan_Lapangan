@@ -14,7 +14,7 @@
                         sport: { 25: '#fff8f0', 50: '#fff0e0', 100: '#ffe0c0', 200: '#ffc18a', 300: '#ffa255', 400: '#fc8320', 500: '#f97316', 600: '#ea580c', 700: '#c2410c', 800: '#9a3412', 900: '#7c2d12' },
                         success: '#03ca77', danger: '#e31748', 'dark-navy': '#001f3e',
                     },
-                    borderRadius: { 'zp': '0.75rem', 'zp-lg': '1rem', 'zp-pill': '9999px' },
+                    fontFamily: { sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'] },
                 },
             },
         };
@@ -22,9 +22,10 @@
             if (localStorage.getItem('darkMode') === 'true') document.documentElement.classList.add('dark');
         })();
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 </head>
-<body class="bg-sport-25 dark:bg-gray-950">
+<body class="bg-sport-25 dark:bg-gray-950 font-sans">
     <div class="flex h-screen">
         <aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 hidden lg:flex flex-col">
             <div class="p-4 border-b border-gray-100 dark:border-gray-800">
@@ -43,22 +44,19 @@
                     $activeClass = 'bg-sport-500/10 text-sport-500';
                     $inactiveClass = 'hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400';
                 ?>
-                <a href="<?= base_url('admin') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-zp transition-colors <?= $isActive('admin') && $currentUrl === 'admin' ? $activeClass : $inactiveClass ?>">
+                <a href="<?= base_url('admin') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-none transition-colors <?= $isActive('admin') && $currentUrl === 'admin' ? $activeClass : $inactiveClass ?>">
                     <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
                 </a>
-                <a href="<?= base_url('admin/fields') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-zp transition-colors <?= $isActive('admin/fields') ? $activeClass : $inactiveClass ?>">
+                <a href="<?= base_url('admin/fields') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-none transition-colors <?= $isActive('admin/fields') ? $activeClass : $inactiveClass ?>">
                     <i data-lucide="trophy" class="w-4 h-4"></i> Kelola Lapangan
                 </a>
-                <a href="<?= base_url('admin/bookings') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-zp transition-colors <?= $isActive('admin/bookings') ? $activeClass : $inactiveClass ?>">
+                <a href="<?= base_url('admin/bookings') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-none transition-colors <?= $isActive('admin/bookings') ? $activeClass : $inactiveClass ?>">
                     <i data-lucide="calendar" class="w-4 h-4"></i> Reservasi
                 </a>
-                <a href="<?= base_url('admin/reports') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-zp transition-colors <?= $isActive('admin/reports') ? $activeClass : $inactiveClass ?>">
+                <a href="<?= base_url('admin/reports') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-none transition-colors <?= $isActive('admin/reports') ? $activeClass : $inactiveClass ?>">
                     <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Laporan
                 </a>
-                <a href="<?= base_url('admin/ratings') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-zp transition-colors <?= $isActive('admin/ratings') ? $activeClass : $inactiveClass ?>">
-                    <i data-lucide="star" class="w-4 h-4"></i> Rating
-                </a>
-                <a href="<?= base_url('admin/users') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-zp transition-colors <?= $isActive('admin/users') ? $activeClass : $inactiveClass ?>">
+                <a href="<?= base_url('admin/users') ?>" class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-none transition-colors <?= $isActive('admin/users') ? $activeClass : $inactiveClass ?>">
                     <i data-lucide="users" class="w-4 h-4"></i> Manajemen Admin
                 </a>
             </nav>
@@ -67,7 +65,7 @@
                     <i data-lucide="user" class="w-4 h-4"></i>
                     <span class="flex-1 truncate"><?= e(auth_user()['display_name'] ?? 'Admin') ?></span>
                 </div>
-                <a href="<?= base_url('admin/logout') ?>" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-danger rounded-zp hover:bg-danger/5 transition-colors mt-1">
+                <a href="<?= base_url('admin/logout') ?>" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-danger rounded-none hover:bg-danger/5 transition-colors mt-1">
                     <i data-lucide="log-out" class="w-4 h-4"></i> Logout
                 </a>
             </div>
@@ -80,7 +78,7 @@
                     <a href="<?= base_url('admin/logout') ?>" class="text-sm text-danger hover:underline flex items-center gap-1 lg:hidden">
                         <i data-lucide="log-out" class="w-4 h-4"></i> Logout
                     </a>
-                    <button onclick="toggleDarkMode()" class="p-2 rounded-zp-pill hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-none hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                         <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
                         <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
                     </button>
@@ -89,12 +87,12 @@
 
             <main class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
                 <?php if ($msg = flash('success')): ?>
-                <div class="flex items-center gap-2 px-4 py-3 rounded-zp bg-success/10 text-success text-sm font-medium">
+                <div class="flex items-center gap-2 px-4 py-3 rounded-none bg-success/10 text-success text-sm font-medium">
                     <i data-lucide="check-circle-2" class="w-4 h-4"></i> <?= $msg ?>
                 </div>
                 <?php endif; ?>
                 <?php if ($msg = flash('error')): ?>
-                <div class="flex items-center gap-2 px-4 py-3 rounded-zp bg-danger/10 text-danger text-sm font-medium">
+                <div class="flex items-center gap-2 px-4 py-3 rounded-none bg-danger/10 text-danger text-sm font-medium">
                     <i data-lucide="alert-circle" class="w-4 h-4"></i> <?= $msg ?>
                 </div>
                 <?php endif; ?>

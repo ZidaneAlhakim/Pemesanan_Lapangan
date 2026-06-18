@@ -42,7 +42,7 @@ class FieldModel extends Model
 
     public function create($data)
     {
-        $stmt = $this->db->prepare("INSERT INTO fields (name, sport, capacity, price_per_hour, description, image) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO fields (name, sport, capacity, price_per_hour, description, image, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             $data['name'],
             $data['sport'],
@@ -50,6 +50,7 @@ class FieldModel extends Model
             $data['price_per_hour'],
             $data['description'] ?? '',
             $data['image'] ?? null,
+            $data['is_active'] ?? 1,
         ]);
         return $this->db->lastInsertId();
     }
@@ -80,6 +81,12 @@ class FieldModel extends Model
     {
         $stmt = $this->db->prepare("UPDATE fields SET is_active = 0 WHERE id = ?");
         return $stmt->execute([$id]);
+    }
+
+    public function toggleActive($id, $value)
+    {
+        $stmt = $this->db->prepare("UPDATE fields SET is_active = ? WHERE id = ?");
+        return $stmt->execute([$value ? 1 : 0, $id]);
     }
 
     public function getHourlyAvailability($fieldId, $date)

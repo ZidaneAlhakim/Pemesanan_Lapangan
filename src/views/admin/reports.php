@@ -6,7 +6,7 @@ include __DIR__ . '/../layouts/admin_header.php';
 <div class="flex items-center justify-between mb-6">
     <form method="GET" action="<?= base_url('admin/reports') ?>" class="flex items-center gap-3">
         <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Pilih Tahun:</label>
-        <select name="year" onchange="this.form.submit()" class="px-4 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-zp bg-white dark:bg-gray-800 shadow-zp-sm focus:ring-2 focus:ring-sport-500/50 outline-none">
+        <select name="year" onchange="this.form.submit()" class="px-4 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-none bg-white dark:bg-gray-800 shadow-zp-sm focus:ring-2 focus:ring-sport-500/50 outline-none">
             <?php for ($y = date('Y'); $y >= date('Y') - 3; $y--): ?>
             <option value="<?= $y ?>" <?= $year == $y ? 'selected' : '' ?>><?= $y ?></option>
             <?php endfor; ?>
@@ -15,34 +15,14 @@ include __DIR__ . '/../layouts/admin_header.php';
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <div class="lg:col-span-2 bg-white dark:bg-gray-900 rounded-zp-lg border border-gray-100 dark:border-gray-800 p-5 shadow-zp-sm">
+    <div class="lg:col-span-2 bg-white dark:bg-gray-900 rounded-none border border-gray-100 dark:border-gray-800 p-5 shadow-zp-sm">
         <h3 class="font-bold mb-6 text-gray-800 dark:text-gray-200">Pendapatan per Bulan (<?= e($year) ?>)</h3>
         <div class="relative h-72">
             <canvas id="revenueChart"></canvas>
         </div>
     </div>
     
-    <div class="bg-white dark:bg-gray-900 rounded-zp-lg border border-gray-100 dark:border-gray-800 p-5 shadow-zp-sm flex flex-col">
-        <h3 class="font-bold mb-4 text-gray-800 dark:text-gray-200">Ringkasan Rating</h3>
-        
-        <div class="flex items-center gap-4 p-4 rounded-zp bg-gradient-to-br from-sport-50 to-sport-100 dark:from-sport-900/40 dark:to-sport-900/10 border border-sport-200/50 dark:border-sport-800/50 mb-6">
-            <div class="w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm">
-                <i data-lucide="star" class="w-6 h-6 text-yellow-500 fill-yellow-500"></i>
-            </div>
-            <div>
-                <p class="text-xs font-semibold uppercase tracking-wider text-sport-600 dark:text-sport-400">Rata-rata Rating</p>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-bold text-gray-900 dark:text-white">
-                        <?= $avgRating ? number_format($avgRating['avg_rating'], 1) : '—' ?>
-                    </span>
-                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                        / 5.0
-                    </span>
-                </div>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Berdasarkan <?= $avgRating['total_ratings'] ?? 0 ?> ulasan pelanggan</p>
-            </div>
-        </div>
-
+    <div class="bg-white dark:bg-gray-900 rounded-none border border-gray-100 dark:border-gray-800 p-5 shadow-zp-sm flex flex-col">
         <h3 class="font-bold mb-4 text-gray-800 dark:text-gray-200">Rincian Bulanan</h3>
         <div class="flex-1 overflow-y-auto pr-2 custom-scrollbar">
             <div class="space-y-2">
@@ -55,7 +35,7 @@ include __DIR__ . '/../layouts/admin_header.php';
                 foreach ($months as $i => $name):
                     $total = $revenueMap[$i + 1] ?? 0;
                 ?>
-                <div class="flex items-center justify-between p-2.5 rounded-zp hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors border border-transparent hover:border-gray-100 dark:hover:border-gray-800">
+                <div class="flex items-center justify-between p-2.5 rounded-none hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors border border-transparent hover:border-gray-100 dark:hover:border-gray-800">
                     <span class="text-sm font-medium text-gray-600 dark:text-gray-300"><?= $name ?></span>
                     <span class="text-sm font-semibold <?= $total > 0 ? 'text-success' : 'text-gray-400' ?>">Rp<?= number_format($total, 0, ',', '.') ?></span>
                 </div>

@@ -47,6 +47,10 @@ function validateBooking($data)
         $errors[] = 'Durasi booking 1–6 jam.';
     }
 
+    if (!empty($data['notes']) && strlen($data['notes']) > 500) {
+        $errors[] = 'Catatan maksimal 500 karakter.';
+    }
+
     if (empty($data['_csrf'])) {
         $errors[] = 'Token keamanan tidak ditemukan.';
     } elseif (!csrf_verify()) {
@@ -87,31 +91,6 @@ function validatePayment($file)
 
     return $errors;
 }
-
-function validateRating($data)
-{
-    $errors = [];
-
-    if (empty($data['booking_id']) || !is_numeric($data['booking_id'])) {
-        $errors[] = 'ID booking tidak valid.';
-    }
-
-    if (empty($data['rating']) || !is_numeric($data['rating'])) {
-        $errors[] = 'Rating wajib diisi.';
-    } else {
-        $r = intval($data['rating']);
-        if ($r < 1 || $r > 5) {
-            $errors[] = 'Rating harus antara 1–5.';
-        }
-    }
-
-    if (strlen($data['review'] ?? '') > 1000) {
-        $errors[] = 'Review maksimal 1000 karakter.';
-    }
-
-    return $errors;
-}
-
 function validateField($data)
 {
     $errors = [];

@@ -1,6 +1,3 @@
-<?php
-// Tampilan Login Admin yang Premium
-?>
 <!DOCTYPE html>
 <html lang="id" class="light">
 <head>
@@ -59,13 +56,13 @@
     
     <!-- Animated Background Blobs -->
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-sport-400/30 dark:bg-sport-600/20 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-70 animate-blob"></div>
-        <div class="absolute top-[20%] right-[-5%] w-96 h-96 bg-yellow-300/30 dark:bg-yellow-600/20 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-pink-300/30 dark:bg-pink-900/20 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-sport-400/30 dark:bg-sport-600/20 rounded-none mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-70 animate-blob"></div>
+        <div class="absolute top-[20%] right-[-5%] w-96 h-96 bg-yellow-300/30 dark:bg-yellow-600/20 rounded-none mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-pink-300/30 dark:bg-pink-900/20 rounded-none mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
     </div>
 
     <!-- Toggle Dark Mode (Absolute TR) -->
-    <button onclick="toggleDarkMode()" class="absolute top-6 right-6 p-3 rounded-full glass-panel hover:scale-110 transition-transform shadow-lg group">
+    <button onclick="toggleDarkMode()" class="absolute top-6 right-6 p-3 rounded-none glass-panel hover:scale-110 transition-transform shadow-lg group">
         <i data-lucide="moon" class="w-5 h-5 text-gray-700 group-hover:text-sport-600 dark:hidden"></i>
         <i data-lucide="sun" class="w-5 h-5 text-gray-300 group-hover:text-yellow-400 hidden dark:block"></i>
     </button>
@@ -75,7 +72,7 @@
         <!-- Logo -->
         <div class="text-center mb-8">
             <a href="<?= base_url('home') ?>" class="inline-flex items-center justify-center gap-3 group">
-                <div class="w-14 h-14 bg-gradient-to-tr from-sport-600 to-sport-400 rounded-2xl shadow-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                <div class="w-14 h-14 bg-gradient-to-tr from-sport-600 to-sport-400 rounded-none shadow-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
                     <i data-lucide="trophy" class="w-7 h-7 text-white"></i>
                 </div>
                 <span class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-sport-600 to-sport-400 tracking-tight">SportVenue</span>
@@ -84,20 +81,20 @@
         </div>
 
         <!-- Login Card -->
-        <div class="glass-panel rounded-2xl shadow-2xl p-8 transform transition-all duration-500 hover:-translate-y-1">
+        <div class="glass-panel rounded-none shadow-2xl p-8 transform transition-all duration-500 hover:-translate-y-1">
             <div class="mb-8">
                 <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Admin Portal</h1>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Silakan masuk untuk melanjutkan</p>
             </div>
 
             <?php if ($msg = flash('error')): ?>
-            <div class="flex items-center gap-3 px-4 py-3 mb-6 rounded-xl bg-danger/10 border border-danger/20 text-danger text-sm font-medium animate-pulse">
+            <div class="flex items-center gap-3 px-4 py-3 mb-6 rounded-none bg-danger/10 border border-danger/20 text-danger text-sm font-medium animate-pulse">
                 <i data-lucide="alert-circle" class="w-5 h-5 shrink-0"></i>
                 <span><?= $msg ?></span>
             </div>
             <?php endif; ?>
             <?php if ($msg = flash('success')): ?>
-            <div class="flex items-center gap-3 px-4 py-3 mb-6 rounded-xl bg-success/10 border border-success/20 text-success text-sm font-medium">
+            <div class="flex items-center gap-3 px-4 py-3 mb-6 rounded-none bg-success/10 border border-success/20 text-success text-sm font-medium">
                 <i data-lucide="check-circle-2" class="w-5 h-5 shrink-0"></i>
                 <span><?= $msg ?></span>
             </div>
@@ -112,7 +109,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                             <i data-lucide="user" class="w-5 h-5 text-gray-400"></i>
                         </div>
-                        <input type="text" name="username" required autocomplete="username" placeholder="Masukkan username" class="w-full pl-10 pr-4 py-3 text-sm border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 focus:bg-white dark:focus:bg-gray-900 focus:ring-0 focus:border-sport-500 transition-all outline-none">
+                        <input type="text" name="username" required autocomplete="username" placeholder="Masukkan username" class="w-full pl-10 pr-4 py-3 text-sm border-2 border-gray-200 dark:border-gray-700 rounded-none bg-white/50 dark:bg-gray-900/50 focus:bg-white dark:focus:bg-gray-900 focus:ring-0 focus:border-sport-500 transition-all outline-none">
                     </div>
                 </div>
 
@@ -124,12 +121,12 @@
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                             <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i>
                         </div>
-                        <input type="password" name="password" required autocomplete="current-password" placeholder="••••••••" class="w-full pl-10 pr-4 py-3 text-sm border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 focus:bg-white dark:focus:bg-gray-900 focus:ring-0 focus:border-sport-500 transition-all outline-none">
+                        <input type="password" name="password" required autocomplete="current-password" placeholder="••••••••" class="w-full pl-10 pr-4 py-3 text-sm border-2 border-gray-200 dark:border-gray-700 rounded-none bg-white/50 dark:bg-gray-900/50 focus:bg-white dark:focus:bg-gray-900 focus:ring-0 focus:border-sport-500 transition-all outline-none">
                     </div>
                 </div>
 
-                <button type="submit" class="group w-full relative inline-flex items-center justify-center px-4 py-3.5 bg-gradient-to-r from-sport-500 to-sport-600 text-white text-sm font-bold rounded-xl overflow-hidden shadow-lg hover:shadow-sport-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sport-500 dark:focus:ring-offset-gray-900">
-                    <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                <button type="submit" class="group w-full relative inline-flex items-center justify-center px-4 py-3.5 bg-gradient-to-r from-sport-500 to-sport-600 text-white text-sm font-bold rounded-none overflow-hidden shadow-lg hover:shadow-sport-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sport-500 dark:focus:ring-offset-gray-900">
+                    <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-none group-hover:w-56 group-hover:h-56 opacity-10"></span>
                     <span class="relative flex items-center gap-2">
                         Masuk ke Dashboard
                         <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>

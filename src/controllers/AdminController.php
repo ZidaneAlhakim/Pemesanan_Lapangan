@@ -114,6 +114,9 @@ class AdminController extends Controller
             } elseif ($action === 'delete') {
                 $model->delete($_POST['id']);
                 flash('success', 'Lapangan berhasil dinonaktifkan.');
+            } elseif ($action === 'toggle_active') {
+                $model->toggleActive($_POST['id'], $_POST['value']);
+                flash('success', 'Status lapangan berhasil diubah.');
             }
 
             csrf_regenerate();
@@ -122,7 +125,7 @@ class AdminController extends Controller
         }
 
         $fields = $model->getAllAdmin();
-        $this->view('admin/fields', ['fields' => $fields]);
+        $this->view('admin/fields', ['fields' => $fields, 'model' => $model]);
     }
 
     public function bookings()
@@ -215,33 +218,13 @@ class AdminController extends Controller
     {
         auth_required();
         $model = new BookingModel();
-        $ratingModel = new RatingModel();
 
         $year = $_GET['year'] ?? date('Y');
         $revenueByMonth = $model->getRevenueByMonth($year);
-        $avgRating = $ratingModel->getAverageRating();
 
         $this->view('admin/reports', [
             'revenueByMonth' => $revenueByMonth,
-            'avgRating' => $avgRating,
             'year' => $year,
-        ]);
-    }
-
-    public function ratings()
-    {
-        auth_required();
-        $model = new RatingModel();
-
-        $page = max(1, intval($_GET['page'] ?? 1));
-        $ratings = $model->getAll($page);
-        $total = $model->countAll();
-        $totalPages = max(1, ceil($total / 20));
-
-        $this->view('admin/ratings', [
-            'ratings' => $ratings,
-            'currentPage' => $page,
-            'totalPages' => $totalPages,
         ]);
     }
 

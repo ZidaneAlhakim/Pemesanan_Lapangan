@@ -88,6 +88,7 @@ class BookingController extends Controller
             'start_time' => $_POST['start_time'],
             'duration_hours' => intval($_POST['duration_hours']),
             'total_price' => $totalPrice,
+            'notes' => $_POST['notes'] ?? '',
         ]);
 
         csrf_regenerate();

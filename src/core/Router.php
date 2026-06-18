@@ -37,14 +37,6 @@ class Router
                 (new BookingController())->history();
                 break;
 
-            case 'rating':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    (new RatingController())->store();
-                } else {
-                    (new RatingController())->form();
-                }
-                break;
-
             case 'admin/login':
                 (new AdminController())->login();
                 break;
@@ -71,10 +63,6 @@ class Router
 
             case 'admin/reports':
                 (new AdminController())->reports();
-                break;
-
-            case 'admin/ratings':
-                (new AdminController())->ratings();
                 break;
 
             case 'admin/users':

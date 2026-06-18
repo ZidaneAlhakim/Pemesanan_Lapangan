@@ -5,16 +5,16 @@ include __DIR__ . '/../layouts/admin_header.php';
 
 <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
     <form method="GET" action="<?= base_url('admin/bookings') ?>" class="flex flex-wrap gap-2 w-full sm:w-auto">
-        <input type="text" name="search" value="<?= e($filters['search'] ?? '') ?>" placeholder="Cari nama/email..." class="px-3.5 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-zp bg-white dark:bg-gray-800 focus:ring-2 focus:ring-sport-500/50 w-full sm:w-64 outline-none transition-shadow">
+        <input type="text" name="search" value="<?= e($filters['search'] ?? '') ?>" placeholder="Cari nama/email..." class="px-3.5 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-none bg-white dark:bg-gray-800 focus:ring-2 focus:ring-sport-500/50 w-full sm:w-64 outline-none transition-shadow">
         
-        <select name="status" class="px-3.5 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-zp bg-white dark:bg-gray-800 outline-none focus:ring-2 focus:ring-sport-500/50">
+        <select name="status" class="px-3.5 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-none bg-white dark:bg-gray-800 outline-none focus:ring-2 focus:ring-sport-500/50">
             <option value="">Status Booking</option>
             <option value="pending" <?= ($filters['status'] ?? '') === 'pending' ? 'selected' : '' ?>>Pending</option>
             <option value="confirmed" <?= ($filters['status'] ?? '') === 'confirmed' ? 'selected' : '' ?>>Dikonfirmasi</option>
             <option value="cancelled" <?= ($filters['status'] ?? '') === 'cancelled' ? 'selected' : '' ?>>Dibatalkan</option>
         </select>
         
-        <select name="payment_status" class="px-3.5 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-zp bg-white dark:bg-gray-800 outline-none focus:ring-2 focus:ring-sport-500/50">
+        <select name="payment_status" class="px-3.5 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-none bg-white dark:bg-gray-800 outline-none focus:ring-2 focus:ring-sport-500/50">
             <option value="">Status Bayar</option>
             <option value="waiting" <?= ($filters['payment_status'] ?? '') === 'waiting' ? 'selected' : '' ?>>Belum Bayar</option>
             <option value="pending_validation" <?= ($filters['payment_status'] ?? '') === 'pending_validation' ? 'selected' : '' ?>>Verifikasi</option>
@@ -22,11 +22,11 @@ include __DIR__ . '/../layouts/admin_header.php';
             <option value="cancelled" <?= ($filters['payment_status'] ?? '') === 'cancelled' ? 'selected' : '' ?>>Batal</option>
         </select>
         
-        <button type="submit" class="px-4 py-2 bg-sport-500 text-white text-sm font-semibold rounded-zp-pill hover:bg-sport-600 flex items-center gap-1.5 shadow-zp-sm transition-all"><i data-lucide="search" class="w-4 h-4"></i> Filter</button>
+        <button type="submit" class="px-4 py-2 bg-sport-500 text-white text-sm font-semibold rounded-none hover:bg-sport-600 flex items-center gap-1.5 shadow-zp-sm transition-all"><i data-lucide="search" class="w-4 h-4"></i> Filter</button>
     </form>
 </div>
 
-<div class="bg-white dark:bg-gray-900 rounded-zp-lg border border-gray-100 dark:border-gray-800 overflow-hidden shadow-zp-sm">
+<div class="bg-white dark:bg-gray-900 rounded-none border border-gray-100 dark:border-gray-800 overflow-hidden shadow-zp-sm">
     <div class="overflow-x-auto">
         <table class="w-full text-sm">
             <thead class="bg-gray-50 dark:bg-gray-800/50">
@@ -62,20 +62,20 @@ include __DIR__ . '/../layouts/admin_header.php';
                             $sl = ['pending' => ['Pending', 'bg-sport-25 dark:bg-sport-900/20 text-sport-500 border-sport-200'], 'confirmed' => ['Dikonfirmasi', 'bg-success/10 text-success border-green-200'], 'cancelled' => ['Batal', 'bg-danger/10 text-danger border-red-200']];
                             $s = $sl[$b['status']] ?? ['', ''];
                             ?>
-                            <span class="px-2 py-0.5 rounded-zp-pill text-xs font-semibold border <?= $s[1] ?>"><?= $s[0] ?></span>
+                            <span class="px-2 py-0.5 rounded-none text-xs font-semibold border <?= $s[1] ?>"><?= $s[0] ?></span>
                             
                             <?php
                             $pl = ['waiting' => ['Belum Bayar', 'bg-sport-25 dark:bg-sport-900/20 text-sport-500 border-sport-200'], 'pending_validation' => ['Verifikasi', 'bg-yellow-50 text-yellow-600 border-yellow-200'], 'paid' => ['Lunas', 'bg-success/10 text-success border-green-200'], 'cancelled' => ['Batal', 'bg-danger/10 text-danger border-red-200']];
                             $p = $pl[$b['payment_status']] ?? ['', ''];
                             ?>
-                            <span class="px-2 py-0.5 rounded-zp-pill text-[10px] uppercase tracking-wider font-bold border <?= $p[1] ?>"><?= $p[0] ?></span>
+                            <span class="px-2 py-0.5 rounded-none text-[10px] uppercase tracking-wider font-bold border <?= $p[1] ?>"><?= $p[0] ?></span>
                         </div>
                     </td>
                     <td class="px-4 py-3 text-right">
                         <?php if ($b['payment_status'] === 'pending_validation' && $b['payment_proof']): ?>
-                            <button onclick="openValidateModal(<?= htmlspecialchars(json_encode($b)) ?>)" class="px-3 py-1.5 text-xs font-semibold bg-sport-500 text-white rounded-zp-pill hover:bg-sport-600 transition-colors shadow-zp-sm">Validasi Pembayaran</button>
+                            <button onclick="openValidateModal(<?= htmlspecialchars(json_encode($b)) ?>)" class="px-3 py-1.5 text-xs font-semibold bg-sport-500 text-white rounded-none hover:bg-sport-600 transition-colors shadow-zp-sm">Validasi Pembayaran</button>
                         <?php elseif ($b['payment_proof']): ?>
-                            <a href="<?= storage_url($b['payment_proof']) ?>" target="_blank" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-zp-pill hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                            <a href="<?= storage_url($b['payment_proof']) ?>" target="_blank" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-none hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                                 <i data-lucide="external-link" class="w-3 h-3"></i> Bukti Bayar
                             </a>
                         <?php else: ?>
@@ -89,7 +89,7 @@ include __DIR__ . '/../layouts/admin_header.php';
     </div>
     <?php if (empty($bookings)): ?>
     <div class="text-center py-12">
-        <div class="w-16 h-16 bg-gray-50 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-3">
+        <div class="w-16 h-16 bg-gray-50 dark:bg-gray-800 rounded-none flex items-center justify-center mx-auto mb-3">
             <i data-lucide="calendar-x" class="w-8 h-8 text-gray-400"></i>
         </div>
         <p class="text-gray-500 dark:text-gray-400 font-medium">Tidak ada reservasi ditemukan.</p>
@@ -104,7 +104,7 @@ include __DIR__ . '/../layouts/admin_header.php';
     for ($i = 1; $i <= $totalPages; $i++):
         $params['page'] = $i;
     ?>
-    <a href="<?= base_url('admin/bookings') . '?' . http_build_query($params) ?>" class="w-8 h-8 flex items-center justify-center text-sm font-medium rounded-zp-pill transition-colors <?= $i === $currentPage ? 'bg-sport-500 text-white shadow-zp-sm' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800' ?>">
+    <a href="<?= base_url('admin/bookings') . '?' . http_build_query($params) ?>" class="w-8 h-8 flex items-center justify-center text-sm font-medium rounded-none transition-colors <?= $i === $currentPage ? 'bg-sport-500 text-white shadow-zp-sm' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800' ?>">
         <?= $i ?>
     </a>
     <?php endfor; ?>
@@ -114,14 +114,14 @@ include __DIR__ . '/../layouts/admin_header.php';
 
 <!-- Modal Validasi -->
 <div id="validateModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
-    <div class="bg-white dark:bg-gray-900 rounded-zp-lg border border-gray-100 dark:border-gray-800 shadow-zp p-6 w-full max-w-lg my-8">
+    <div class="bg-white dark:bg-gray-900 rounded-none border border-gray-100 dark:border-gray-800 shadow-zp p-6 w-full max-w-lg my-8">
         <div class="flex justify-between items-center mb-5">
             <h3 class="font-bold text-lg">Validasi Pembayaran</h3>
             <button onclick="document.getElementById('validateModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"><i data-lucide="x" class="w-5 h-5"></i></button>
         </div>
         
         <div class="space-y-4">
-            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-zp p-4 text-sm border border-gray-100 dark:border-gray-800">
+            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-none p-4 text-sm border border-gray-100 dark:border-gray-800">
                 <div class="grid grid-cols-2 gap-2">
                     <p class="text-gray-500 dark:text-gray-400">ID Booking</p>
                     <p class="font-semibold" id="val_id">-</p>
@@ -134,7 +134,7 @@ include __DIR__ . '/../layouts/admin_header.php';
 
             <div>
                 <p class="text-sm font-medium mb-2">Bukti Pembayaran</p>
-                <div class="border border-gray-200 dark:border-gray-700 rounded-zp overflow-hidden bg-gray-50 dark:bg-gray-800 flex justify-center">
+                <div class="border border-gray-200 dark:border-gray-700 rounded-none overflow-hidden bg-gray-50 dark:bg-gray-800 flex justify-center">
                     <img id="val_proof_img" src="" alt="Bukti Pembayaran" class="max-h-64 object-contain">
                 </div>
                 <a id="val_proof_link" href="#" target="_blank" class="text-sm text-sport-500 hover:underline mt-2 inline-block">Buka gambar penuh &rarr;</a>
@@ -144,9 +144,9 @@ include __DIR__ . '/../layouts/admin_header.php';
                 <?= csrf_field() ?>
                 <input type="hidden" name="booking_id" id="val_booking_id">
                 
-                <button type="submit" name="action" value="reject" class="flex-1 py-2 text-sm font-semibold border border-danger/20 text-danger bg-danger/5 rounded-zp-pill hover:bg-danger hover:text-white transition-colors" onclick="return confirm('Tolak bukti pembayaran ini?')">Tolak</button>
-                <button type="submit" name="action" value="cancel" class="flex-1 py-2 text-sm font-semibold border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-800 rounded-zp-pill hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" onclick="return confirm('Batalkan seluruh reservasi ini?')">Batalkan Reservasi</button>
-                <button type="submit" name="action" value="confirm" class="flex-1 py-2 text-sm font-semibold bg-success text-white rounded-zp-pill hover:bg-green-600 transition-colors shadow-zp-sm">Terima & Lunas</button>
+                <button type="submit" name="action" value="reject" class="flex-1 py-2 text-sm font-semibold border border-danger/20 text-danger bg-danger/5 rounded-none hover:bg-danger hover:text-white transition-colors" onclick="return confirm('Tolak bukti pembayaran ini?')">Tolak</button>
+                <button type="submit" name="action" value="cancel" class="flex-1 py-2 text-sm font-semibold border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-800 rounded-none hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" onclick="return confirm('Batalkan seluruh reservasi ini?')">Batalkan Reservasi</button>
+                <button type="submit" name="action" value="confirm" class="flex-1 py-2 text-sm font-semibold bg-success text-white rounded-none hover:bg-green-600 transition-colors shadow-zp-sm">Terima & Lunas</button>
             </form>
         </div>
     </div>

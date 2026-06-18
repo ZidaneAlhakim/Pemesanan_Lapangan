@@ -5,8 +5,8 @@ class BookingModel extends Model
     public function create($data)
     {
         $stmt = $this->db->prepare("
-            INSERT INTO bookings (field_id, customer_name, customer_email, customer_phone, booking_date, start_time, duration_hours, total_price, status, payment_status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'waiting')
+            INSERT INTO bookings (field_id, customer_name, customer_email, customer_phone, booking_date, start_time, duration_hours, total_price, notes, status, payment_status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 'waiting')
         ");
         $stmt->execute([
             $data['field_id'],
@@ -17,6 +17,7 @@ class BookingModel extends Model
             $data['start_time'],
             $data['duration_hours'],
             $data['total_price'],
+            $data['notes'] ?? '',
         ]);
         return $this->db->lastInsertId();
     }
