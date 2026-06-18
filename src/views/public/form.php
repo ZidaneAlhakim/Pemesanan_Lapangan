@@ -74,8 +74,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
                             <!-- Catatan -->
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Catatan <span class="text-gray-400 font-normal">(opsional)</span></label>

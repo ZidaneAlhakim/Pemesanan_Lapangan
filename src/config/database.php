@@ -39,11 +39,11 @@ class Database
 
     private static function connectMysql()
     {
-        $host = getenv('DB_MYSQL_HOST') ?: '127.0.0.1';
-        $port = getenv('DB_MYSQL_PORT') ?: '3306';
-        $name = getenv('DB_MYSQL_NAME') ?: 'pemesanan_lapangan';
-        $user = getenv('DB_MYSQL_USER') ?: 'root';
-        $pass = getenv('DB_MYSQL_PASS') ?: '';
+        $host = getenv('DB_HOST') ?: '127.0.0.1';
+        $port = getenv('DB_PORT') ?: '3306';
+        $name = getenv('DB_NAME') ?: 'pemesanan_lapangan';
+        $user = getenv('DB_USERNAME') ?: 'root';
+        $pass = getenv('DB_PASSWORD') ?: '';
         $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;port=$port;dbname=$name;charset=$charset";
